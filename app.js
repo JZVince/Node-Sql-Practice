@@ -20,7 +20,7 @@ const client = new Client({
 });
 
 client.connect()
-/*
+
 fs.readFile('./sql/report.sql', 'utf8', function (err, data) {
   if (err) throw err;
 
@@ -39,14 +39,14 @@ fs.readFile('./sql/report.sql', 'utf8', function (err, data) {
       });
   }
 });
-*/
 
+/*
 // Insert data into db during Read
 obj.from.path('./data/courses.csv').to.array(function (data) {
-  const insert = 'INSERT INTO courses(id, cname, teacher) VALUES($1, $2, $3)';
+  let insert = 'INSERT INTO courses(id, cname, teacher) VALUES($1, $2, $3)';
   client.query('DELETE FROM courses', (err, res) => {if (err) throw err})
     for (var index = 1; index < data.length; index++) {
-      const value = [data[index][0], data[index][1], data[index][2]];
+      let value = [data[index][0], data[index][1], data[index][2]];
       client.query(insert, value, (err, res) => {
         if (err) throw err;
       })
@@ -54,11 +54,11 @@ obj.from.path('./data/courses.csv').to.array(function (data) {
 });
 
 obj.from.path('./data/marks.csv').to.array(function (data) {
-  const insert = 'INSERT INTO marks(test_id, student_id, mark) VALUES($1, $2, $3)';
+  let insert = 'INSERT INTO marks(test_id, student_id, mark) VALUES($1, $2, $3)';
   client.query('DELETE FROM marks', (err, res) => {if (err) throw err})
   // Clear previous table content
     for (var index = 1; index < data.length; index++) {
-      const value = [data[index][0], data[index][1], data[index][2]];
+      let value = [data[index][0], data[index][1], data[index][2]];
       client.query(insert, value, (err, res) => {
         if (err) throw err;
       })
@@ -66,10 +66,10 @@ obj.from.path('./data/marks.csv').to.array(function (data) {
 });
 
 obj.from.path('./data/students.csv').to.array(function (data) {
-  const insert = 'INSERT INTO students(id, sname) VALUES($1, $2)';
+  let insert = 'INSERT INTO students(id, sname) VALUES($1, $2)';
   client.query('DELETE FROM students', (err, res) => {if (err) throw err})
     for (var index = 1; index < data.length; index++) {
-      const value = [data[index][0], data[index][1]];
+      let value = [data[index][0], data[index][1]];
       client.query(insert, value, (err, res) => {
         if (err) throw err;
       })
@@ -77,22 +77,26 @@ obj.from.path('./data/students.csv').to.array(function (data) {
 });
 
 obj.from.path('./data/tests.csv').to.array(function (data) {
-  const insert = 'INSERT INTO courses(id, course_id, sweight) VALUES($1, $2, $3)';
+  let insert = 'INSERT INTO courses(id, course_id, sweight) VALUES($1, $2, $3)';
   client.query('DELETE FROM tests', (err, res) => {if (err) throw err})
     for (var index = 1; index < data.length; index++) {
-      const value = [data[index][0], data[index][1], data[index][2]];
+      let value = [data[index][0], data[index][1], data[index][2]];
       client.query(insert, value, (err, res) => {
         if (err) throw err;
       })
     }
 });
-
+*/
 
 const insert = 'INSERT INTO courses(id, cname, teacher) VALUES($1, $2, $3)';
 const value = ['2', 'Math', 'James'];
-const select = 'SELECT * FROM courses';
+const select_courses = 'SELECT * FROM courses';
+const select_marks = 'SELECT * FROM marks';
+const select_students = 'SELECT * FROM students';
+const select_tests = 'SELECT * FROM tests';
+const drop = 'DROP TABLE marks';
 
-client.query(select, (err, res) => {
+client.query(drop, (err, res) => {
   if (err) {
     console.log(err.stack)
   } else {

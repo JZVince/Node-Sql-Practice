@@ -33,8 +33,8 @@ CREATE TABLE IF NOT EXISTS courses (
 );
 
 CREATE TABLE IF NOT EXISTS marks (
-  test_id int NOT NULL,
-  student_id int NOT NULL,
+  test_id varchar(100) NOT NULL,
+  student_id varchar(100) NOT NULL,
   mark int,
 );
 
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS students (
 
 CREATE TABLE IF NOT EXISTS tests (
   id int NOT NULL,
-  course_id int NOT NULL,
+  course_id varchar(100) NOT NULL,
   sweight int NOT NULL,
   PRIMARY KEY (id)
 );
