@@ -19,10 +19,6 @@ const client = new Client({
 
 client.connect()
 
-const create_database = 'CREATE DATABASE schoolDB;'
-const use_database = 'USE schoolDB'
-
-/*
 fs.readFile('./sql/report.sql', 'utf8', function (err, data) {
   if (err) throw err;
 
@@ -42,7 +38,7 @@ fs.readFile('./sql/report.sql', 'utf8', function (err, data) {
       });
   }
 });
-
+/*
 pool.connect(function(err, client, done) {
   var stream = client.query(copyFrom('COPY courses FROM STDIN'));
   var fileStream = fs.createReadStream('./data/courses.csv')
