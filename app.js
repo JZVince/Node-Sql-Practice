@@ -14,6 +14,7 @@ var pool = new Pool();
 
 const client = new Client({
   host: process.env.DB_HOST,
+  database: 'schoolDB',
   user: process.env.DB_USER,
   password: process.env.DB_PASS,
   multiStatements: true
@@ -44,15 +45,15 @@ client.query('SELECT NOW()', null)
     client.query('DELETE FROM courses', (err, res) => { if (err) throw err })
   })
   .then(() => {
-    obj.from.path('./data/courses.csv').to.array(function (data) {
+    obj.from.path('./data/courses.csv').to.array(function (data_1) {
       let insert = 'INSERT INTO courses(id, cname, teacher) VALUES($1, $2, $3)';
-      for (var index = 1; index < data.length; index++) {
-        let value = [data[index][0], data[index][1], data[index][2]];
+      for (var index = 1; index < data_1.length; index++) {
+        let value = [data_1[index][0], data_1[index][1], data_1[index][2]];
         client.query(insert, value, (err, res) => {
           if (err) throw err;
         })
       }
-      console.log('courses');
+      console.log('Courses: ', data_1);
     })
   })
 
@@ -60,10 +61,10 @@ client.query('SELECT NOW()', null)
     client.query('DELETE FROM marks', (err, res) => { if (err) throw err })
   })
   .then(() => {
-    obj.from.path('./data/marks.csv').to.array(function (data) {
+    obj.from.path('./data/marks.csv').to.array(function (data_2) {
       let insert = 'INSERT INTO marks(test_id, student_id, mark) VALUES($1, $2, $3)';
-      for (var index = 1; index < data.length; index++) {
-        let value = [data[index][0], data[index][1], data[index][2]];
+      for (var index = 1; index < data_2.length; index++) {
+        let value = [data_2[index][0], data_2[index][1], data_2[index][2]];
         client.query(insert, value, (err, res) => {
           if (err) throw err;
         })
@@ -75,10 +76,10 @@ client.query('SELECT NOW()', null)
     client.query('DELETE FROM students', (err, res) => { if (err) throw err })
   })
   .then(() => {
-    obj.from.path('./data/students.csv').to.array(function (data) {
+    obj.from.path('./data/students.csv').to.array(function (data_3) {
       let insert = 'INSERT INTO students(id, sname) VALUES($1, $2)';
-      for (var index = 1; index < data.length; index++) {
-        let value = [data[index][0], data[index][1]];
+      for (var index = 1; index < data_3.length; index++) {
+        let value = [data_3[index][0], data_3[index][1]];
         client.query(insert, value, (err, res) => {
           if (err) throw err;
         })
@@ -90,10 +91,10 @@ client.query('SELECT NOW()', null)
     client.query('DELETE FROM tests', (err, res) => { if (err) throw err })
   })
   .then(() => {
-    obj.from.path('./data/tests.csv').to.array(function (data) {
+    obj.from.path('./data/tests.csv').to.array(function (data_4) {
       let insert = 'INSERT INTO courses(id, course_id, sweight) VALUES($1, $2, $3)';
-      for (var index = 1; index < data.length; index++) {
-        let value = [data[index][0], data[index][1], data[index][2]];
+      for (var index = 1; index < data_4.length; index++) {
+        let value = [data_4[index][0], data_4[index][1], data_4[index][2]];
         client.query(insert, value, (err, res) => {
           if (err) throw err;
         })
@@ -131,7 +132,7 @@ client.query('SELECT NOW()', null)
     const drop = 'DROP TABLE marks';
     const del = 'DELETE FROM courses'
 
-    client.query(select_marks, (err, res) => {
+    client.query(select_courses, (err, res) => {
       if (err) {
         console.log(err.stack)
       } else {
