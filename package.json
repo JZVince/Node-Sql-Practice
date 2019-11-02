@@ -1,0 +1,21 @@
+{
+  "name": "hatchway",
+  "version": "1.0.0",
+  "description": "Assessment",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jiahua Zhou",
+  "license": "ISC",
+  "dependencies": {
+    "csv-parser": "^2.3.1",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.1.6-alpha.6",
+    "mssql": "^5.1.0",
+    "mysql": "^2.17.1",
+    "pg": "^7.12.1",
+    "pg-copy-streams": "^2.2.2",
+    "pug": "^2.0.4"
+  }
+}

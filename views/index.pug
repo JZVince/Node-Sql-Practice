@@ -1,0 +1,89 @@
+head
+    link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500")
+    link(href="/css/style.css" rel="stylesheet" type="text/css")
+
+div(class="page")
+
+    div(class="header")
+        a(href="/")
+            h1(id="title") Student Report
+
+    
+    div(class="page-red")
+        form(method="post" action="/courses" encType="multipart/form-data" novalidate)
+            div(class="form-header")
+                h2 Add a courses csv.
+            div(class="form-field")
+                input(class="input" name="cName" type="text" placeholder="Course Name" required)
+            div(class="form-field")
+                input(class="input" name="cTeacher" type="text" placeholder="Course Teacher" required)
+            div(class="form-field")
+                input(class="input" type="file" name="coursesFile" required)
+            div(class="form-actions")
+                button(class="btn" type="submit") Add
+            div(id="error")
+                if error_courses
+                    p= error_courses
+
+    div(class="page-blue")
+        form(method="post" action="/marks" encType="multipart/form-data" novalidate)
+            div(class="form-header")
+                h2 Add a marks csv.
+            div(class="form-field")
+                input(class="input" name="sId" type="text" placeholder="Student ID" required)
+            div(class="form-field")
+                input(class="input" name="sMark" type="text" placeholder="Student Mark" required)
+            div(class="form-field")
+                input(class="input" type="file" name="marksFile" required)
+            div(class="form-actions")
+                button(class="btn" type="submit") Add
+            div(id="error")
+                if error_marks
+                    p= error_marks
+
+        div(class="page-green")
+        form(method="post" action="/students" encType="multipart/form-data" novalidate)
+            div(class="form-header")
+                h2 Add a students csv.
+            div(class="form-field")
+                input(class="input" name="sName" type="text" placeholder="Student Name" required)
+            div(class="form-field")
+                input(class="input" type="file" name="studentsFile" required)
+            div(class="form-actions")
+                button(class="btn" type="submit") Add
+            div(id="error")
+                if error_students
+                    p= error_students
+
+        div(class="page-yellow")
+        form(method="post" action="/tests" encType="multipart/form-data" novalidate)
+            div(class="form-header")
+                h2 Add a tests csv.
+            div(class="form-field")
+                input(class="input" name="cId" type="text" placeholder="Course ID" required)
+            div(class="form-field")
+                input(class="input" name="cWeight" type="text" placeholder="Course Weight" required)
+            div(class="form-field")
+                input(class="input" type="file" name="testsFile" required)
+            div(class="form-actions")
+                button(class="btn" type="submit") Add
+            div(id="error")
+                if error_tests
+                    p= error_tests
+
+    div(class="page-white")
+        form(method="post" action="/report-card" novalidate)
+            div(class="form-actions")
+                    button(class="btn" type="submit") Re-Match
+
+
+div(class="report-card-board")
+    h2 Report Cards
+    if result
+        ul(class="report-card-list")
+                each match in result
+                    li="Student ID: " + student.id + ", Name: " + student.name + "\"" "Total Avergae:       " + student.average "%"
+                    each course in result
+                        li="Course: " + course.name + ", Teacher: " + course.teacher + "\"" + "Final Grade: " + student.cgrade + "%"
+
+        br
